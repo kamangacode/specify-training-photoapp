@@ -1,0 +1,30 @@
+# photoapp Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2026-02-21
+
+## Active Technologies
+
+- TypeScript 5.x + React 18 (JSX) + Vite 5 (build), exifr (EXIF parsing), @dnd-kit/core + @dnd-kit/sortable (drag-and-drop), JSZip (save file bundling), React Context + useReducer (state) (001-photo-albums)
+
+## Project Structure
+
+```text
+backend/
+frontend/
+tests/
+```
+
+## Commands
+
+npm test && npm run lint
+
+## Code Style
+
+TypeScript 5.x + React 18 (JSX): Follow standard conventions
+
+## Recent Changes
+
+- 001-photo-albums: Added TypeScript 5.x + React 18 (JSX) + Vite 5 (build), exifr (EXIF parsing), @dnd-kit/core + @dnd-kit/sortable (drag-and-drop), JSZip (save file bundling), React Context + useReducer (state)
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
