@@ -1,0 +1,90 @@
+/* =====================================================================
+   ConfirmDialog — Modal confirmation dialog
+   Feature: 001-modern-ui / US3
+   ===================================================================== */
+
+.dialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--padding-card);
+  max-width: 420px;
+  width: 90vw;
+  background: var(--color-surface);
+}
+
+/* Native <dialog>::backdrop */
+.dialog::backdrop {
+  background: var(--color-overlay-dark);
+}
+
+.title {
+  margin: 0 0 var(--spacing-3);
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.message {
+  margin: 0 0 var(--spacing-6);
+  font-size: var(--font-size-body-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}
+
+/* Cancel button — secondary/outlined style */
+.cancelButton {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: var(--padding-button-y) var(--padding-button-x);
+  font-family: inherit;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.cancelButton:hover {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-text-tertiary);
+}
+
+.cancelButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Confirm button — destructive style */
+.confirmButton {
+  background: var(--color-error);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-button);
+  padding: var(--padding-button-y) var(--padding-button-x);
+  font-family: inherit;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.confirmButton:hover {
+  background: var(--color-error-hover, #b71c1c);
+}
+
+.confirmButton:active {
+  transform: scale(0.98);
+}
+
+.confirmButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}

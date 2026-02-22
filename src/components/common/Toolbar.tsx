@@ -3,6 +3,7 @@ import { useAppContext } from '../../store/AppContext';
 import { UnsavedBadge } from './UnsavedBadge';
 import { exportToFile, importFromFile } from '../../services/saveFile';
 import { ConfirmDialog } from './ConfirmDialog';
+import styles from './Toolbar.module.css';
 
 interface ToolbarProps {
   onOpenTrash: () => void;
@@ -48,18 +49,15 @@ export function Toolbar({ onOpenTrash }: ToolbarProps) {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '0.5rem',
-        alignItems: 'center',
-        padding: '0.5rem 1rem',
-        borderBottom: '1px solid #eee',
-      }}
-    >
+    <div data-testid="toolbar" className={styles.toolbar}>
       <UnsavedBadge />
 
-      <button type="button" onClick={() => void handleExport()} aria-label="Export save file">
+      <button
+        type="button"
+        onClick={() => void handleExport()}
+        aria-label="Export save file"
+        className={styles.buttonSecondary}
+      >
         Export
       </button>
 
@@ -68,23 +66,29 @@ export function Toolbar({ onOpenTrash }: ToolbarProps) {
         type="file"
         accept=".zip,.photoalbum.zip,application/zip"
         onChange={handleImportChange}
-        style={{ display: 'none' }}
+        className={styles.hiddenInput}
         aria-label="Select save file to import"
       />
       <button
         type="button"
         onClick={() => importInputRef.current?.click()}
         aria-label="Import save file"
+        className={styles.buttonSecondary}
       >
         Import
       </button>
 
-      <button type="button" onClick={onOpenTrash} aria-label="Open trash">
+      <button
+        type="button"
+        onClick={onOpenTrash}
+        aria-label="Open trash"
+        className={styles.buttonSecondary}
+      >
         Trash
       </button>
 
       {importError && (
-        <p role="alert" style={{ color: 'red', margin: 0, fontSize: '0.85rem' }}>
+        <p role="alert" className={styles.errorMessage}>
           {importError}
         </p>
       )}

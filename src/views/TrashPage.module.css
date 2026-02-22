@@ -1,0 +1,53 @@
+/* =====================================================================
+   TrashPage — Page wrapper for the Trash view
+   Feature: 001-modern-ui / Phase 6
+   ===================================================================== */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg-secondary);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--padding-card);
+  background: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.backButton {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: var(--padding-button-y) var(--padding-button-x);
+  font-family: inherit;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.backButton:hover {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-text-tertiary);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.main {
+  padding: var(--padding-section);
+}

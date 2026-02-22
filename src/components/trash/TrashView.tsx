@@ -1,6 +1,7 @@
 import { TrashItem } from './TrashItem';
 import { EmptyState } from '../common/EmptyState';
 import { useTrash } from '../../hooks/useTrash';
+import styles from './TrashView.module.css';
 
 export function TrashView() {
   const { trashedPhotos, restorePhoto, deletePhoto } = useTrash();
@@ -14,9 +15,9 @@ export function TrashView() {
   }
 
   return (
-    <div data-testid="trash-view" style={{ padding: '1rem' }}>
-      <h2>Trash</h2>
-      <p style={{ color: '#666', fontSize: '0.9rem' }}>
+    <div data-testid="trash-view" className={styles.container}>
+      <h2 className={styles.heading}>Trash</h2>
+      <p className={styles.count}>
         {trashedPhotos.length} {trashedPhotos.length === 1 ? 'photo' : 'photos'}
       </p>
       {trashedPhotos.map((photo) => (

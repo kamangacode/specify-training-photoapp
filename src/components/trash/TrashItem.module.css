@@ -1,0 +1,122 @@
+/* =====================================================================
+   TrashItem — Single photo row in the Trash view
+   Feature: 001-modern-ui / Phase 6
+   ===================================================================== */
+
+.item {
+  display: flex;
+  gap: var(--spacing-3);
+  align-items: center;
+  padding: var(--spacing-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.thumbnailPlaceholder {
+  width: 60px;
+  height: 60px;
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fileName {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  margin: var(--spacing-1) 0 0;
+  font-size: var(--font-size-body-xs);
+  color: var(--color-text-tertiary);
+}
+
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.restoreButton {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: var(--spacing-1) var(--spacing-3);
+  font-family: inherit;
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.restoreButton:hover {
+  border-color: var(--color-accent-secondary);
+  color: var(--color-accent-secondary-hover);
+  background: var(--color-accent-secondary-light);
+}
+
+.restoreButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.deleteButton {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  padding: var(--spacing-1) var(--spacing-3);
+  font-family: inherit;
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-error);
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.deleteButton:hover {
+  background: var(--color-error);
+  color: #fff;
+  border-color: var(--color-error);
+}
+
+.deleteButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Album picker dialog */
+.albumPicker {
+  padding: var(--spacing-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  margin-top: var(--spacing-3);
+}
+
+.albumPickerList {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-3) 0;
+}
+
+.albumPickerList li + li {
+  margin-top: var(--spacing-2);
+}

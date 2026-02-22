@@ -4,10 +4,13 @@ import { useAppContext } from '../../store/AppContext';
 import { getDerivedDateRange, getPhotoCount } from '../../store/selectors';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { useAlbums } from '../../hooks/useAlbums';
+import styles from './AlbumCard.module.css';
 
 interface AlbumCardProps {
   album: Album;
   onClick: (albumId: string) => void;
+  isLoading?: boolean;
+  isSelected?: boolean;
 }
 
 function formatDateRange(range: { earliest: Date; latest: Date } | null): string {
@@ -18,7 +21,7 @@ function formatDateRange(range: { earliest: Date; latest: Date } | null): string
   return `${fmt(range.earliest)} – ${fmt(range.latest)}`;
 }
 
-export function AlbumCard({ album, onClick }: AlbumCardProps) {
+export function AlbumCard({ album, onClick, isLoading = false, isSelected = false }: AlbumCardProps) {
   const { state } = useAppContext();
   const { renameAlbum, deleteAlbum } = useAlbums();
   const dateRange = getDerivedDateRange(state, album.id);
@@ -29,6 +32,7 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState(album.name);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   function handleRenameSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -37,97 +41,92 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
     setIsRenaming(false);
   }
 
-  function handleCardClick(e: React.MouseEvent) {
-    // Don't navigate when interacting with controls
-    if ((e.target as HTMLElement).closest('button, input')) return;
-    onClick(album.id);
+  if (isLoading) {
+    return (
+      <div className={styles.card} aria-busy="true" aria-label="Loading album">
+        <div className={styles.skeletonImage} />
+        <div className={styles.text}>
+          <div className={styles.skeletonTitle} />
+          <div className={styles.skeletonMeta} />
+        </div>
+      </div>
+    );
   }
 
   return (
     <>
       <article
         data-testid="album-card"
-        onClick={handleCardClick}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            if (!(e.target as HTMLElement).closest('button, input')) onClick(album.id);
-          }
-        }}
-        tabIndex={0}
-        role="button"
-        aria-label={`Open album ${album.name}`}
-        style={{ cursor: 'pointer' }}
+        className={`${styles.card}${isSelected ? ` ${styles.isSelected}` : ''}`}
       >
-        <div
-          data-testid="album-cover"
-          aria-hidden="true"
-          style={{ width: '100%', paddingBottom: '60%', background: '#ccc', position: 'relative' }}
+        {/* Open-album action — a proper button (not role="button" on article) */}
+        <button
+          type="button"
+          aria-label={`Open album ${album.name}`}
+          onClick={() => onClick(album.id)}
+          className={styles.openArea}
         >
-          {coverSrc && (
-            <img
-              src={coverSrc}
-              alt=""
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-              }}
+          <div data-testid="album-cover" className={styles.imageWrapper} aria-hidden="true">
+            {coverSrc && !imgError ? (
+              <>
+                <img
+                  src={coverSrc}
+                  alt=""
+                  className={styles.img}
+                  onError={() => setImgError(true)}
+                />
+                <div className={styles.overlay} />
+              </>
+            ) : (
+              <div className={styles.overlay} />
+            )}
+          </div>
+
+          <div className={styles.text}>
+            <h2 className={styles.title}>{album.name}</h2>
+            <p className={styles.meta}>
+              {photoCount} {photoCount === 1 ? 'photo' : 'photos'}
+            </p>
+            <p className={styles.meta}>{formatDateRange(dateRange)}</p>
+          </div>
+        </button>
+
+        {/* Rename/Delete actions — siblings of the open button, NOT nested */}
+        {isRenaming ? (
+          <form onSubmit={handleRenameSubmit} className={styles.text}>
+            <input
+              type="text"
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              aria-label="Rename album"
+              autoFocus
+              onBlur={() => setIsRenaming(false)}
+              className={styles.renameInput}
             />
-          )}
-        </div>
-
-        <div style={{ padding: '0.5rem' }}>
-          {isRenaming ? (
-            <form onSubmit={handleRenameSubmit}>
-              <input
-                type="text"
-                value={renameValue}
-                onChange={(e) => setRenameValue(e.target.value)}
-                aria-label="Rename album"
-                autoFocus
-                onBlur={() => setIsRenaming(false)}
-                style={{ width: '100%', fontSize: '1rem' }}
-              />
-            </form>
-          ) : (
-            <h2 style={{ margin: 0, fontSize: '1rem' }}>{album.name}</h2>
-          )}
-
-          <p style={{ margin: '0.25rem 0 0', fontSize: '0.85rem', color: '#555' }}>
-            {photoCount} {photoCount === 1 ? 'photo' : 'photos'}
-          </p>
-          <p style={{ margin: '0.25rem 0 0', fontSize: '0.8rem', color: '#777' }}>
-            {formatDateRange(dateRange)}
-          </p>
-
-          <div style={{ display: 'flex', gap: '0.4rem', marginTop: '0.5rem' }}>
+          </form>
+        ) : (
+          <div className={styles.actions}>
             <button
               type="button"
               aria-label={`Rename album ${album.name}`}
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
                 setRenameValue(album.name);
                 setIsRenaming(true);
               }}
-              style={{ fontSize: '0.75rem' }}
+              className={styles.actionButton}
             >
               Rename
             </button>
             <button
               type="button"
               aria-label={`Delete album ${album.name}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowDeleteConfirm(true);
-              }}
-              style={{ fontSize: '0.75rem' }}
+              onClick={() => setShowDeleteConfirm(true)}
+              className={styles.actionButton}
             >
               Delete
             </button>
           </div>
-        </div>
+        )}
       </article>
 
       {showDeleteConfirm && (

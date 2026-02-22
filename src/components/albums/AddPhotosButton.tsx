@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { processPhotoFiles } from '../../services/fileImport';
 import { useAppContext } from '../../store/AppContext';
 import { ACCEPTED_MIME_TYPES } from '../../constants';
+import styles from './AddPhotosButton.module.css';
 
 interface AddPhotosButtonProps {
   albumId: string;
@@ -39,7 +40,7 @@ export function AddPhotosButton({ albumId }: AddPhotosButtonProps) {
         accept={acceptAttr}
         multiple
         onChange={handleChange}
-        style={{ display: 'none' }}
+        className={styles.hiddenInput}
         aria-label="Select photos to add"
       />
       <label htmlFor={`add-photos-${albumId}`}>
@@ -47,13 +48,14 @@ export function AddPhotosButton({ albumId }: AddPhotosButtonProps) {
           type="button"
           onClick={() => inputRef.current?.click()}
           aria-label="Add photos to album"
+          className={styles.button}
         >
           Add Photos
         </button>
       </label>
 
       {errors.length > 0 && (
-        <ul role="list" aria-label="Import errors" style={{ color: 'red', marginTop: '0.5rem' }}>
+        <ul role="list" aria-label="Import errors" className={styles.errorList}>
           {errors.map((err) => (
             <li key={err.fileName}>
               <strong>{err.fileName}</strong>: {err.reason}
