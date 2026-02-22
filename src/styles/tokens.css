@@ -1,0 +1,162 @@
+/* =====================================================================
+   Design Tokens — Modern UI Design System
+   Feature: 001-modern-ui
+   Reference: specs/001-modern-ui/data-model.md
+   ===================================================================== */
+
+:root {
+  /* ===== COLORS ===== */
+
+  /* Primary accent — coral orange (decorative/backgrounds; use dark text on it) */
+  --color-accent-primary: #FF6B35;
+  --color-accent-primary-hover: #E55A2B;
+  --color-accent-primary-light: #FFE8DC;
+
+  /* Secondary accent — bright blue (UI components: focus rings, borders; ≥3:1 on white) */
+  --color-accent-secondary: #4A90E2;
+  --color-accent-secondary-hover: #2E6DB4;
+  --color-accent-secondary-light: #E8F0FF;
+
+  /* Tertiary accent — lime green (decorative tags and success indicators) */
+  --color-accent-tertiary: #7ED321;
+  --color-accent-tertiary-hover: #6BB318;
+  --color-accent-tertiary-light: #F0FFD6;
+
+  /* Text colors — all meet WCAG AA on white */
+  --color-text-primary: #1A1A1A;    /* 17.4:1 on white — AAA */
+  --color-text-secondary: #4A4A4A;  /* 8.9:1 on white — AAA  */
+  --color-text-tertiary: #757575;   /* 4.6:1 on white — AA   */
+  --color-text-disabled: #BDBDBD;
+
+  /* Surfaces & backgrounds */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8F9FB;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F0F2F5;
+
+  /* Borders */
+  --color-border: #E0E0E0;
+  --color-border-focus: #4A90E2;  /* 3.3:1 on white — meets UI component standard */
+
+  /* Semantic */
+  --color-success: #34A853;
+  --color-warning: #FBBC04;
+  --color-error: #EA4335;
+  --color-info: #4A90E2;
+
+  /* Overlays */
+  --color-overlay-dark: rgba(26, 26, 26, 0.3);
+  --color-overlay-light: rgba(255, 107, 53, 0.1);
+
+  /* ===== TYPOGRAPHY ===== */
+
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
+
+  /* Headings — responsive with clamp() */
+  --font-size-h1: clamp(2rem, 5vw, 3.5rem);
+  --font-size-h2: clamp(1.75rem, 4vw, 2.5rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2rem);
+  --font-size-h4: 1.25rem;
+
+  /* Body */
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-body-xs: 0.75rem;
+
+  /* Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ===== SPACING (8px grid) ===== */
+
+  --spacing-1: 0.25rem;   /* 4px  */
+  --spacing-2: 0.5rem;    /* 8px  */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-5: 1.25rem;   /* 20px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-7: 1.75rem;   /* 28px */
+  --spacing-8: 2rem;      /* 32px */
+  --spacing-10: 2.5rem;   /* 40px */
+  --spacing-12: 3rem;     /* 48px */
+  --spacing-16: 4rem;     /* 64px */
+
+  /* Semantic spacing aliases */
+  --padding-button-y: var(--spacing-3);
+  --padding-button-x: var(--spacing-6);
+  --padding-card: var(--spacing-6);
+  --padding-section-y: var(--spacing-8);
+  --padding-section-x: var(--spacing-4);
+  --gap-grid: var(--spacing-4);
+  --gap-stack: var(--spacing-6);
+
+  /* ===== BORDER RADIUS ===== */
+
+  --radius-sm: 0.25rem;    /* 4px  — tags */
+  --radius-base: 0.5rem;   /* 8px  — inputs */
+  --radius-md: 0.75rem;    /* 12px — buttons */
+  --radius-lg: 1rem;       /* 16px — cards */
+  --radius-xl: 1.5rem;     /* 24px — panels */
+  --radius-2xl: 2rem;      /* 32px — large surfaces */
+  --radius-full: 9999px;   /* pill */
+
+  /* Semantic radius aliases */
+  --radius-card: var(--radius-lg);
+  --radius-button: var(--radius-md);
+  --radius-input: var(--radius-base);
+
+  /* ===== SIZES ===== */
+
+  --size-icon-sm: 1rem;
+  --size-icon-md: 1.5rem;
+  --size-icon-lg: 2rem;
+  --size-icon-xl: 2.5rem;
+
+  --size-button-sm: 2rem;
+  --size-button-md: 2.5rem;
+  --size-button-lg: 3rem;
+
+  /* ===== SHADOWS ===== */
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12), 0 6px 12px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.08);
+  --shadow-inset: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-accent: 0 4px 16px rgba(255, 107, 53, 0.15);
+
+  /* ===== TRANSITIONS ===== */
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== Z-INDEX ===== */
+
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-bg: 400;
+  --z-modal: 500;
+  --z-tooltip: 600;
+  --z-notification: 700;
+}
+
+/* Responsive adjustments: narrower section padding on mobile */
+@media (max-width: 640px) {
+  :root {
+    --padding-section-y: var(--spacing-6);
+    --gap-grid: var(--spacing-3);
+  }
+}

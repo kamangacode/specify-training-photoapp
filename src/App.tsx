@@ -4,6 +4,7 @@ import { Toolbar } from './components/common/Toolbar';
 import { MainPage } from './views/MainPage';
 import { AlbumViewPage } from './views/AlbumViewPage';
 import { TrashPage } from './views/TrashPage';
+import styles from './App.module.css';
 
 export type View = { name: 'main' } | { name: 'album'; albumId: string } | { name: 'trash' };
 
@@ -26,15 +27,17 @@ function AppShell({ view, onNavigate }: AppShellProps) {
   const openTrash = () => onNavigate({ name: 'trash' });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className={styles.appShell}>
       <Toolbar onOpenTrash={openTrash} />
-      {view.name === 'album' ? (
-        <AlbumViewPage albumId={view.albumId} onBack={() => onNavigate({ name: 'main' })} />
-      ) : view.name === 'trash' ? (
-        <TrashPage onBack={() => onNavigate({ name: 'main' })} />
-      ) : (
-        <MainPage onOpenAlbum={(albumId) => onNavigate({ name: 'album', albumId })} />
-      )}
+      <div className={styles.content}>
+        {view.name === 'album' ? (
+          <AlbumViewPage albumId={view.albumId} onBack={() => onNavigate({ name: 'main' })} />
+        ) : view.name === 'trash' ? (
+          <TrashPage onBack={() => onNavigate({ name: 'main' })} />
+        ) : (
+          <MainPage onOpenAlbum={(albumId) => onNavigate({ name: 'album', albumId })} />
+        )}
+      </div>
     </div>
   );
 }

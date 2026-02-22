@@ -19,8 +19,8 @@
 
 **Purpose**: Scaffold new directories and install dev tooling needed by all subsequent phases.
 
-- [ ] T001 Create `src/styles/` directory and scaffold three empty CSS files: `tokens.css`, `globals.css`, `animations.css`
-- [ ] T002 Install axe-playwright dev dependency: `npm install -D axe-playwright` (required for WCAG E2E checks)
+- [X] T001 Create `src/styles/` directory and scaffold three empty CSS files: `tokens.css`, `globals.css`, `animations.css`
+- [X] T002 Install axe-playwright dev dependency: `npm install -D axe-playwright` (required for WCAG E2E checks)
 
 ---
 
@@ -30,12 +30,12 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T003 Write Vitest unit tests for color contrast utility in `tests/unit/utils/colorContrast.test.ts` — must FAIL (RED) before T004; covers `getContrastRatio`, `isWcagAA`, and all palette hex pairs from data-model.md
-- [ ] T004 Create `src/utils/colorContrast.ts` with `hexToRgb`, `getLuminance`, `getContrastRatio`, `isWcagAA` — makes T003 tests GREEN
-- [ ] T005 Fill `src/styles/tokens.css` with the full design token system from data-model.md: color tokens (accent-primary `#FF6B35`, accent-secondary `#4A90E2`, accent-tertiary `#7ED321`, text, surface, border, semantic, overlay), typography tokens (font-family-sans, font-size-h1 through body-xs, font-weight, line-height), spacing tokens (spacing-1 through spacing-24, padding-button/card/section, gap-grid), border-radius tokens (radius-sm through radius-full, radius-card/button/input), shadow tokens (shadow-sm/md/lg/accent), transition tokens (transition-fast/base/slow), z-index tokens
-- [ ] T006 [P] Fill `src/styles/globals.css` with CSS reset and base styles: `* { box-sizing: border-box; margin: 0; padding: 0; }`, html/body (font-family-sans, color-text-primary, bg-primary, antialiased), a, button (font inherit, cursor pointer), img (display block, max-width 100%)
-- [ ] T007 [P] Fill `src/styles/animations.css` with reusable keyframes and utility class: `@keyframes shimmer` (left-to-right gradient sweep using color-surface-subtle), `@keyframes fadeIn`, `@keyframes slideUp`, `.skeleton` class (linear-gradient + shimmer animation + border-radius-sm)
-- [ ] T008 Update `src/main.tsx` to import `./styles/tokens.css`, `./styles/globals.css`, `./styles/animations.css` at the top — before the App import; verify `npm run dev` still loads without errors
+- [X] T003 Write Vitest unit tests for color contrast utility in `tests/unit/utils/colorContrast.test.ts` — must FAIL (RED) before T004; covers `getContrastRatio`, `isWcagAA`, and all palette hex pairs from data-model.md
+- [X] T004 Create `src/utils/colorContrast.ts` with `hexToRgb`, `getLuminance`, `getContrastRatio`, `isWcagAA` — makes T003 tests GREEN
+- [X] T005 Fill `src/styles/tokens.css` with the full design token system from data-model.md: color tokens (accent-primary `#FF6B35`, accent-secondary `#4A90E2`, accent-tertiary `#7ED321`, text, surface, border, semantic, overlay), typography tokens (font-family-sans, font-size-h1 through body-xs, font-weight, line-height), spacing tokens (spacing-1 through spacing-24, padding-button/card/section, gap-grid), border-radius tokens (radius-sm through radius-full, radius-card/button/input), shadow tokens (shadow-sm/md/lg/accent), transition tokens (transition-fast/base/slow), z-index tokens
+- [X] T006 [P] Fill `src/styles/globals.css` with CSS reset and base styles: `* { box-sizing: border-box; margin: 0; padding: 0; }`, html/body (font-family-sans, color-text-primary, bg-primary, antialiased), a, button (font inherit, cursor pointer), img (display block, max-width 100%)
+- [X] T007 [P] Fill `src/styles/animations.css` with reusable keyframes and utility class: `@keyframes shimmer` (left-to-right gradient sweep using color-surface-subtle), `@keyframes fadeIn`, `@keyframes slideUp`, `.skeleton` class (linear-gradient + shimmer animation + border-radius-sm)
+- [X] T008 Update `src/main.tsx` to import `./styles/tokens.css`, `./styles/globals.css`, `./styles/animations.css` at the top — before the App import; verify `npm run dev` still loads without errors
 
 **Checkpoint**: Run `npm test` — T003 unit tests must pass (GREEN). Run `npm run dev` — app loads without visual regressions.
 
@@ -49,20 +49,20 @@
 
 ### Tests for User Story 1 ⚠️ Write FIRST — verify RED before implementing
 
-- [ ] T009 [P] [US1] Write E2E test for US1 in `tests/e2e/ui-us1-modern-navigation.spec.ts`: assertions for (1) toolbar renders with `.toolbar` CSS class, (2) primary button has `color: #FF6B35` or derived accent color, (3) album cards have `border-radius ≥ 12px`, (4) `checkA11y(page)` from axe-playwright passes on `/` route — test must FAIL (RED) before implementation
+- [X] T009 [P] [US1] Write E2E test for US1 in `tests/e2e/ui-us1-modern-navigation.spec.ts`: assertions for (1) toolbar renders with `.toolbar` CSS class, (2) primary button has `color: #FF6B35` or derived accent color, (3) album cards have `border-radius ≥ 12px`, (4) `checkA11y(page)` from axe-playwright passes on `/` route — test must FAIL (RED) before implementation
 
 ### Implementation for User Story 1
 
-- [ ] T010 [P] [US1] Create `src/components/common/Toolbar.module.css` with: `.toolbar` (flex, space-between, bg-bg-primary, shadow-sm, padding-card), `.buttonPrimary` (bg accent-primary, white text, radius-button, padding-button, hover + active states via tokens), `.buttonSecondary` (outline style, accent-secondary border/text, same shape), `.buttonDestructive` (ghost, error color, fills error on hover)
-- [ ] T011 [US1] Update `src/components/common/Toolbar.tsx`: import `styles from './Toolbar.module.css'`; replace all `style={{ }}` props with `className={styles.*}` references; apply `.buttonPrimary` / `.buttonSecondary` / `.buttonDestructive` based on action type (add/create = primary, export/edit = secondary, delete = destructive)
-- [ ] T012 [P] [US1] Create `src/components/albums/AlbumCard.module.css` with: `.card` (bg-surface, radius-card, shadow-sm, border color-border, transition-base, cursor pointer), `.card:hover` (shadow-md, translateY(-4px)), `.card:active` (shadow-sm, scale 0.98), `.card.isSelected` (2px solid accent-primary border), `.image` (aspect-ratio 1, overflow hidden, radius inherited), `.img` (object-fit cover, transition-slow for scale), `.card:hover .img` (scale 1.03), `.overlay` (absolute inset-0, overlay-light, opacity 0→1 on hover), `.text` (padding-4, border-top color-border), `.title` (font-semibold, text-primary, body-md), `.meta` (font-xs, text-tertiary), `.skeletonImage` + `.skeletonTitle` + `.skeletonMeta` (compose from `.skeleton` in animations.css with appropriate dimensions)
-- [ ] T013 [US1] Update `src/components/albums/AlbumCard.tsx`: add `isLoading?: boolean` and `isSelected?: boolean` props; import `styles from './AlbumCard.module.css'`; replace all `style={{ }}` props with CSS module class names; render skeleton markup when `isLoading` is true; apply `.isSelected` class when selected; handle image `onError` to show placeholder
-- [ ] T014 [P] [US1] Create `src/components/albums/AlbumGrid.module.css` with: `.grid` (display grid, auto-fill, minmax 240px 1fr, gap-grid, padding-section), `.empty` (display flex, flex-direction column, align-items center, justify-content center, min-height 300px)
-- [ ] T015 [US1] Update `src/components/albums/AlbumGrid.tsx`: import `styles from './AlbumGrid.module.css'`; replace all `style={{ }}` props with CSS module class names; ensure empty state renders `EmptyState` component in `.empty` wrapper
-- [ ] T016 [P] [US1] Create `src/views/MainPage.module.css` with: `.page` (min-height 100vh, bg-bg-secondary), `.header` (bg-bg-primary, shadow-sm, padding using tokens), `.content` (max-width 1920px, margin auto, padding-section)
-- [ ] T017 [US1] Update `src/views/MainPage.tsx`: import `styles from './MainPage.module.css'`; replace all `style={{ }}` props with CSS module class names
-- [ ] T018 [P] [US1] Create `src/App.module.css` with navigation styles: `.app` (min-height 100vh), `.nav` (bg-bg-primary, border-bottom, shadow-sm), `.navLink` (text-secondary, hover text-primary, transition-fast), `.navLink.active` (text accent-primary, font-semibold, border-bottom or left-border indicator)
-- [ ] T019 [US1] Update `src/App.tsx`: import `styles from './App.module.css'`; replace all `style={{ }}` props with CSS module class names; apply `.active` class to the current route nav link
+- [X] T010 [P] [US1] Create `src/components/common/Toolbar.module.css` with: `.toolbar` (flex, space-between, bg-bg-primary, shadow-sm, padding-card), `.buttonPrimary` (bg accent-primary, white text, radius-button, padding-button, hover + active states via tokens), `.buttonSecondary` (outline style, accent-secondary border/text, same shape), `.buttonDestructive` (ghost, error color, fills error on hover)
+- [X] T010 [US1] Update `src/components/common/Toolbar.tsx`: import `styles from './Toolbar.module.css'`; replace all `style={{ }}` props with `className={styles.*}` references; apply `.buttonPrimary` / `.buttonSecondary` / `.buttonDestructive` based on action type (add/create = primary, export/edit = secondary, delete = destructive)
+- [X] T010 [P] [US1] Create `src/components/albums/AlbumCard.module.css` with: `.card` (bg-surface, radius-card, shadow-sm, border color-border, transition-base, cursor pointer), `.card:hover` (shadow-md, translateY(-4px)), `.card:active` (shadow-sm, scale 0.98), `.card.isSelected` (2px solid accent-primary border), `.image` (aspect-ratio 1, overflow hidden, radius inherited), `.img` (object-fit cover, transition-slow for scale), `.card:hover .img` (scale 1.03), `.overlay` (absolute inset-0, overlay-light, opacity 0→1 on hover), `.text` (padding-4, border-top color-border), `.title` (font-semibold, text-primary, body-md), `.meta` (font-xs, text-tertiary), `.skeletonImage` + `.skeletonTitle` + `.skeletonMeta` (compose from `.skeleton` in animations.css with appropriate dimensions)
+- [X] T010 [US1] Update `src/components/albums/AlbumCard.tsx`: add `isLoading?: boolean` and `isSelected?: boolean` props; import `styles from './AlbumCard.module.css'`; replace all `style={{ }}` props with CSS module class names; render skeleton markup when `isLoading` is true; apply `.isSelected` class when selected; handle image `onError` to show placeholder
+- [X] T010 [P] [US1] Create `src/components/albums/AlbumGrid.module.css` with: `.grid` (display grid, auto-fill, minmax 240px 1fr, gap-grid, padding-section), `.empty` (display flex, flex-direction column, align-items center, justify-content center, min-height 300px)
+- [X] T010 [US1] Update `src/components/albums/AlbumGrid.tsx`: import `styles from './AlbumGrid.module.css'`; replace all `style={{ }}` props with CSS module class names; ensure empty state renders `EmptyState` component in `.empty` wrapper
+- [X] T010 [P] [US1] Create `src/views/MainPage.module.css` with: `.page` (min-height 100vh, bg-bg-secondary), `.header` (bg-bg-primary, shadow-sm, padding using tokens), `.content` (max-width 1920px, margin auto, padding-section)
+- [X] T010 [US1] Update `src/views/MainPage.tsx`: import `styles from './MainPage.module.css'`; replace all `style={{ }}` props with CSS module class names
+- [X] T010 [P] [US1] Create `src/App.module.css` with navigation styles: `.app` (min-height 100vh), `.nav` (bg-bg-primary, border-bottom, shadow-sm), `.navLink` (text-secondary, hover text-primary, transition-fast), `.navLink.active` (text accent-primary, font-semibold, border-bottom or left-border indicator)
+- [X] T010 [US1] Update `src/App.tsx`: import `styles from './App.module.css'`; replace all `style={{ }}` props with CSS module class names; apply `.active` class to the current route nav link
 
 **Checkpoint**: Run `npm run test:e2e -- ui-us1`. T009 E2E test must pass (GREEN). Verify the main page renders with modern card layout, correct button hierarchy, and no axe violations.
 

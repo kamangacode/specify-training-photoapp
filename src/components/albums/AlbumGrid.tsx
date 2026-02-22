@@ -20,6 +20,7 @@ import { AlbumCard } from './AlbumCard';
 import { useAlbums } from '../../hooks/useAlbums';
 import { useAppContext } from '../../store/AppContext';
 import type { Album } from '../../models/types';
+import styles from './AlbumGrid.module.css';
 
 interface SortableAlbumCardProps {
   album: Album;
@@ -36,13 +37,12 @@ function SortableAlbumCard({ album, onOpenAlbum }: SortableAlbumCardProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} role="listitem">
-      {/* Drag handle */}
+    <div ref={setNodeRef} style={style} role="listitem" className={styles.sortableWrapper}>
       <div
         {...attributes}
         {...listeners}
         aria-label={`Drag to reorder ${album.name}`}
-        style={{ cursor: 'grab', padding: '4px', textAlign: 'center', userSelect: 'none' }}
+        className={styles.dragHandle}
       >
         ⠿
       </div>
@@ -67,7 +67,7 @@ export function AlbumGrid({ onOpenAlbum, onCreateAlbum }: AlbumGridProps) {
 
   if (albums.length === 0) {
     return (
-      <div data-testid="album-grid-empty">
+      <div data-testid="album-grid-empty" className={styles.emptyWrapper}>
         <EmptyState
           message="No albums yet. Create your first album to get started."
           action={{ label: 'Create Album', onClick: onCreateAlbum }}
@@ -88,7 +88,6 @@ export function AlbumGrid({ onOpenAlbum, onCreateAlbum }: AlbumGridProps) {
     dispatch({ type: 'REORDER_ALBUMS', payload: { albumOrder: newOrder } });
   }
 
-  // Use state.albumOrder as the canonical order for SortableContext IDs
   const orderedIds = state.isCustomOrdered ? state.albumOrder : albums.map((a) => a.id);
 
   return (
@@ -98,12 +97,7 @@ export function AlbumGrid({ onOpenAlbum, onCreateAlbum }: AlbumGridProps) {
           data-testid="album-grid"
           role="list"
           aria-label="Photo albums"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            gap: '1rem',
-            padding: '1rem',
-          }}
+          className={styles.grid}
         >
           {albums.map((album) => (
             <SortableAlbumCard key={album.id} album={album} onOpenAlbum={onOpenAlbum} />
