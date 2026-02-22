@@ -32,7 +32,7 @@ export function PhotoTile({ photo, onOpen, onTrash, isLoading }: PhotoTileProps)
           onClick={() => onOpen(photo.id)}
           onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onOpen(photo.id)}
           aria-label={`View photo ${photo.fileName}`}
-          style={{ display: 'block', width: '100%', height: '100%', border: 'none', padding: 0, background: 'none', cursor: 'pointer' }}
+          className={styles.imageButton}
         >
           {src && !imgError ? (
             <img

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAppContext } from '../../store/AppContext';
+import styles from './Lightbox.module.css';
 
 interface LightboxProps {
   photoId: string;
@@ -50,31 +51,14 @@ export function Lightbox({ photoId, onClose, onNext, onPrev }: LightboxProps) {
       aria-modal="true"
       aria-label={`Viewing photo: ${photo.fileName}`}
       onClick={handleOverlayClick}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.85)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
+      className={styles.overlay}
     >
       <button
         ref={closeButtonRef}
         type="button"
         onClick={onClose}
         aria-label="Close lightbox"
-        style={{
-          position: 'absolute',
-          top: '1rem',
-          right: '1rem',
-          background: 'none',
-          border: 'none',
-          color: '#fff',
-          fontSize: '1.5rem',
-          cursor: 'pointer',
-        }}
+        className={styles.closeButton}
       >
         ✕
       </button>
@@ -83,15 +67,7 @@ export function Lightbox({ photoId, onClose, onNext, onPrev }: LightboxProps) {
         type="button"
         onClick={onPrev}
         aria-label="Previous photo"
-        style={{
-          position: 'absolute',
-          left: '1rem',
-          background: 'none',
-          border: 'none',
-          color: '#fff',
-          fontSize: '2rem',
-          cursor: 'pointer',
-        }}
+        className={styles.prevButton}
       >
         ‹
       </button>
@@ -100,7 +76,7 @@ export function Lightbox({ photoId, onClose, onNext, onPrev }: LightboxProps) {
         <img
           src={src}
           alt={photo.fileName}
-          style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain' }}
+          className={styles.image}
         />
       )}
 
@@ -108,15 +84,7 @@ export function Lightbox({ photoId, onClose, onNext, onPrev }: LightboxProps) {
         type="button"
         onClick={onNext}
         aria-label="Next photo"
-        style={{
-          position: 'absolute',
-          right: '3rem',
-          background: 'none',
-          border: 'none',
-          color: '#fff',
-          fontSize: '2rem',
-          cursor: 'pointer',
-        }}
+        className={styles.nextButton}
       >
         ›
       </button>

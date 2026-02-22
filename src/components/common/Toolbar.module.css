@@ -102,6 +102,11 @@
   box-shadow: none;
 }
 
+/* ---- Hidden file input ---- */
+.hiddenInput {
+  display: none;
+}
+
 /* ---- Error message ---- */
 .errorMessage {
   color: var(--color-error);

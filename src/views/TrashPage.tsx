@@ -1,4 +1,5 @@
 import { TrashView } from '../components/trash/TrashView';
+import styles from './TrashPage.module.css';
 
 interface TrashPageProps {
   onBack: () => void;
@@ -6,22 +7,14 @@ interface TrashPageProps {
 
 export function TrashPage({ onBack }: TrashPageProps) {
   return (
-    <div data-testid="trash-page">
-      <header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          padding: '0.75rem 1rem',
-          borderBottom: '1px solid #eee',
-        }}
-      >
-        <button type="button" onClick={onBack} aria-label="Back to albums">
+    <div data-testid="trash-page" className={styles.page}>
+      <header className={styles.header}>
+        <button type="button" onClick={onBack} aria-label="Back to albums" className={styles.backButton}>
           ← Back
         </button>
-        <h1 style={{ margin: 0, fontSize: '1.25rem' }}>Trash</h1>
+        <h1 className={styles.pageTitle}>Trash</h1>
       </header>
-      <main>
+      <main className={styles.main}>
         <TrashView />
       </main>
     </div>

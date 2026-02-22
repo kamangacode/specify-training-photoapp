@@ -1,0 +1,76 @@
+/* =====================================================================
+   Lightbox — Full-screen photo viewer overlay
+   Feature: 001-modern-ui / Phase 6
+   ===================================================================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal, 1000);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: var(--font-size-h3);
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-button);
+  transition: background var(--transition-fast);
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.prevButton,
+.nextButton {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-button);
+  transition: background var(--transition-fast);
+}
+
+.prevButton {
+  left: var(--spacing-4);
+}
+
+.nextButton {
+  right: var(--spacing-6, 3rem);
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.prevButton:focus-visible,
+.nextButton:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}

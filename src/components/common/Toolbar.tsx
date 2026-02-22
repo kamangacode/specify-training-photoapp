@@ -66,7 +66,7 @@ export function Toolbar({ onOpenTrash }: ToolbarProps) {
         type="file"
         accept=".zip,.photoalbum.zip,application/zip"
         onChange={handleImportChange}
-        style={{ display: 'none' }}
+        className={styles.hiddenInput}
         aria-label="Select save file to import"
       />
       <button

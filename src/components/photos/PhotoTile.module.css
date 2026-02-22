@@ -24,6 +24,38 @@
   transform: scale(0.97);
 }
 
+/* --- Drag states --- */
+
+.isDragging {
+  opacity: 0.6;
+  box-shadow: var(--shadow-lg);
+  cursor: grabbing;
+  transform: scale(1.02);
+}
+
+.isDropTarget {
+  border: 2px dashed var(--color-accent-secondary);
+  background-color: var(--color-accent-secondary-light);
+  transition: background-color var(--transition-fast);
+}
+
+/* --- Image button (fills imageWrapper) --- */
+
+.imageButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.imageButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
 /* --- Image wrapper --- */
 
 .imageWrapper {
