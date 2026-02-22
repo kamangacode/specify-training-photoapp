@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Photo } from '../../models/types';
 import { useAppContext } from '../../store/AppContext';
 import { ConfirmDialog } from '../common/ConfirmDialog';
+import styles from './TrashItem.module.css';
 
 interface TrashItemProps {
   photo: Photo;
@@ -34,38 +35,32 @@ export function TrashItem({ photo, onRestore, onDelete }: TrashItemProps) {
 
   return (
     <>
-      <div
-        data-testid="trash-item"
-        style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', padding: '0.5rem 0' }}
-      >
+      <div data-testid="trash-item" className={styles.item}>
         {src ? (
           <img
             src={src}
             alt={photo.fileName}
-            style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }}
+            className={styles.thumbnail}
           />
         ) : (
-          <div style={{ width: '60px', height: '60px', background: '#ddd', borderRadius: '4px' }} />
+          <div className={styles.thumbnailPlaceholder} />
         )}
 
-        <div style={{ flex: 1 }}>
-          <p style={{ margin: 0, fontWeight: 'bold' }}>{photo.fileName}</p>
-          <p style={{ margin: '2px 0 0', fontSize: '0.8rem', color: '#666' }}>
-            Original album: {originalAlbumName}
-          </p>
-          <p style={{ margin: '2px 0 0', fontSize: '0.8rem', color: '#666' }}>
-            Trashed: {trashedDate}
-          </p>
+        <div className={styles.info}>
+          <p className={styles.fileName}>{photo.fileName}</p>
+          <p className={styles.meta}>Original album: {originalAlbumName}</p>
+          <p className={styles.meta}>Trashed: {trashedDate}</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.4rem' }}>
-          <button type="button" onClick={handleRestore} aria-label={`Restore ${photo.fileName}`}>
+        <div className={styles.actionButtons}>
+          <button type="button" onClick={handleRestore} aria-label={`Restore ${photo.fileName}`} className={styles.restoreButton}>
             Restore
           </button>
           <button
             type="button"
             onClick={() => setShowDeleteConfirm(true)}
             aria-label={`Delete ${photo.fileName} permanently`}
+            className={styles.deleteButton}
           >
             Delete Permanently
           </button>
@@ -86,12 +81,12 @@ export function TrashItem({ photo, onRestore, onDelete }: TrashItemProps) {
       )}
 
       {showAlbumPicker && (
-        <div role="dialog" aria-label="Select destination album">
+        <div role="dialog" aria-label="Select destination album" className={styles.albumPicker}>
           <p>Original album was deleted. Choose a destination:</p>
           {availableAlbums.length === 0 ? (
             <p>No albums available. Create an album first.</p>
           ) : (
-            <ul style={{ listStyle: 'none', padding: 0 }}>
+            <ul className={styles.albumPickerList}>
               {availableAlbums.map((album) => (
                 <li key={album.id}>
                   <button

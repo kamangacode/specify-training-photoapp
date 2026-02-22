@@ -1,0 +1,21 @@
+/* =====================================================================
+   TrashView — List of trashed photos
+   Feature: 001-modern-ui / Phase 6
+   ===================================================================== */
+
+.container {
+  padding: var(--padding-card);
+}
+
+.heading {
+  margin: 0 0 var(--spacing-2);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.count {
+  margin: 0 0 var(--spacing-4);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-tertiary);
+}
