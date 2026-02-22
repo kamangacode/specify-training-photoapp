@@ -154,7 +154,7 @@ src/
 │   ├── photos/       PhotoGrid, PhotoTile, Lightbox
 │   ├── trash/        TrashView, TrashItem
 │   └── common/       EmptyState, ConfirmDialog, UnsavedBadge, SortToggle
-├── hooks/            useAlbums, usePhotos, useTrash, useDragDrop, useLightbox
+├── hooks/            useAlbums, usePhotos, useTrash, useLightbox
 ├── services/         exif.ts, saveFile.ts, fileImport.ts
 ├── store/            AppContext, reducer, actions, selectors
 ├── models/           types.ts
@@ -169,7 +169,8 @@ tests/
     ├── us2-create-album.spec.ts
     ├── us3-view-sort-photos.spec.ts
     ├── us4-reorder-albums.spec.ts
-    └── us5-manage-albums-photos.spec.ts
+    ├── us5-manage-albums-photos.spec.ts
+    └── performance.spec.ts
 ```
 
 ---

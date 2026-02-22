@@ -45,11 +45,7 @@ export function AlbumView({ albumId, onBack }: AlbumViewProps) {
           ← Back
         </button>
         <h1 style={{ margin: 0, fontSize: '1.25rem', flex: 1 }}>{album.name}</h1>
-        <SortToggle
-          albumId={albumId}
-          currentMode={album.photoSortMode}
-          onToggle={setSortMode}
-        />
+        <SortToggle albumId={albumId} currentMode={album.photoSortMode} onToggle={setSortMode} />
         <AddPhotosButton albumId={albumId} />
       </header>
 

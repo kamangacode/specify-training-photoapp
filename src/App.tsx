@@ -5,10 +5,7 @@ import { MainPage } from './views/MainPage';
 import { AlbumViewPage } from './views/AlbumViewPage';
 import { TrashPage } from './views/TrashPage';
 
-export type View =
-  | { name: 'main' }
-  | { name: 'album'; albumId: string }
-  | { name: 'trash' };
+export type View = { name: 'main' } | { name: 'album'; albumId: string } | { name: 'trash' };
 
 export default function App() {
   const [view, setView] = useState<View>({ name: 'main' });

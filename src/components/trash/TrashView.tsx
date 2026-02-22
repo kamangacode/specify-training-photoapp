@@ -20,12 +20,7 @@ export function TrashView() {
         {trashedPhotos.length} {trashedPhotos.length === 1 ? 'photo' : 'photos'}
       </p>
       {trashedPhotos.map((photo) => (
-        <TrashItem
-          key={photo.id}
-          photo={photo}
-          onRestore={restorePhoto}
-          onDelete={deletePhoto}
-        />
+        <TrashItem key={photo.id} photo={photo} onRestore={restorePhoto} onDelete={deletePhoto} />
       ))}
     </div>
   );

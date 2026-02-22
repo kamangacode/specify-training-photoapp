@@ -89,9 +89,7 @@ export function AlbumGrid({ onOpenAlbum, onCreateAlbum }: AlbumGridProps) {
   }
 
   // Use state.albumOrder as the canonical order for SortableContext IDs
-  const orderedIds = state.isCustomOrdered
-    ? state.albumOrder
-    : albums.map((a) => a.id);
+  const orderedIds = state.isCustomOrdered ? state.albumOrder : albums.map((a) => a.id);
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

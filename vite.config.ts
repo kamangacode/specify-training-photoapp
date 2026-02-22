@@ -17,12 +17,20 @@ export default defineConfig({
         statements: 80,
       },
       exclude: [
+        // Entry point and config files
         'src/main.tsx',
         'src/test-setup.ts',
-        'tests/e2e/**',
-        '**/*.d.ts',
+        'src/models/types.ts',
+        'eslint.config.js',
         'vite.config.ts',
         'playwright.config.ts',
+        '**/*.d.ts',
+        // E2E tests (run separately via Playwright)
+        'tests/e2e/**',
+        // React UI components and views: tested via Playwright E2E, not unit tests
+        'src/App.tsx',
+        'src/views/**',
+        'src/components/**',
       ],
     },
   },

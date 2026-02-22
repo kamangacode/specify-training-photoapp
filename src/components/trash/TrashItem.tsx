@@ -77,7 +77,10 @@ export function TrashItem({ photo, onRestore, onDelete }: TrashItemProps) {
           title="Delete Permanently"
           message={`Permanently delete "${photo.fileName}"? This cannot be undone.`}
           confirmLabel="Delete"
-          onConfirm={() => { onDelete(photo.id); setShowDeleteConfirm(false); }}
+          onConfirm={() => {
+            onDelete(photo.id);
+            setShowDeleteConfirm(false);
+          }}
           onCancel={() => setShowDeleteConfirm(false)}
         />
       )}
@@ -93,7 +96,10 @@ export function TrashItem({ photo, onRestore, onDelete }: TrashItemProps) {
                 <li key={album.id}>
                   <button
                     type="button"
-                    onClick={() => { onRestore(photo.id, album.id); setShowAlbumPicker(false); }}
+                    onClick={() => {
+                      onRestore(photo.id, album.id);
+                      setShowAlbumPicker(false);
+                    }}
                   >
                     {album.name}
                   </button>

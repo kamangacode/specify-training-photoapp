@@ -1,4 +1,4 @@
-import type { AppState, AppAction, Album, Photo } from '../models/types';
+import type { AppState, AppAction, Album } from '../models/types';
 
 function generateId(): string {
   return crypto.randomUUID();
@@ -146,7 +146,7 @@ export function reducer(state: AppState, action: AppAction): AppState {
               photoIds: album.photoIds.filter((id) => id !== photoId),
               coverPhotoId:
                 album.coverPhotoId === photoId
-                  ? album.photoIds.find((id) => id !== photoId) ?? null
+                  ? (album.photoIds.find((id) => id !== photoId) ?? null)
                   : album.coverPhotoId,
             },
           }

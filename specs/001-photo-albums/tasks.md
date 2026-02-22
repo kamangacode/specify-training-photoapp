@@ -185,14 +185,14 @@ description: "Task list for Photo Album Organizer implementation"
 
 **Purpose**: Performance, accessibility, and resilience improvements that span multiple user stories.
 
-- [ ] T055 [P] Add Playwright performance spec in `tests/e2e/performance.spec.ts`: cold start < 3s via `PerformanceObserver`; viewport tile render < 500ms on album with 200 photos; DnD snap < 100ms
-- [ ] T056 [P] Verify `@axe-core/playwright` a11y audit passes in all 5 E2E spec files; fix any WCAG 2.1 AA violations found
-- [ ] T057 [P] Add skeleton placeholder tiles to `PhotoGrid` in `src/components/photos/PhotoGrid.tsx`: render grey boxes while `IntersectionObserver` loads off-screen images
-- [ ] T058 [P] Add batch import error display to `AddPhotosButton` in `src/components/albums/AddPhotosButton.tsx`: non-blocking inline list of rejected file names and reasons
-- [ ] T059 [P] Verify lightbox wrap-around edge cases in `Lightbox` in `src/components/photos/Lightbox.tsx`: navigating backwards from first photo jumps to last; forwards from last jumps to first
-- [ ] T060 Run full test suite and verify coverage: `npm run test:all` — all tests green; `npm run test:coverage` — ≥ 80% lines
-- [ ] T061 Run `npm run lint` and `npm run format` — fix all lint and formatting issues
-- [ ] T062 Run quickstart.md validation checklist end-to-end: create album, add photos, export, close, re-import, verify state restored, drag to reorder, view lightbox, trash photo, restore
+- [X] T055 [P] Add Playwright performance spec in `tests/e2e/performance.spec.ts`: cold start < 3s via `PerformanceObserver`; viewport tile render < 500ms on album with 200 photos; DnD snap < 100ms
+- [X] T056 [P] Verify `@axe-core/playwright` a11y audit passes in all 5 E2E spec files; fix any WCAG 2.1 AA violations found
+- [X] T057 [P] Add skeleton placeholder tiles to `PhotoGrid` in `src/components/photos/PhotoGrid.tsx`: render grey boxes while `IntersectionObserver` loads off-screen images
+- [X] T058 [P] Add batch import error display to `AddPhotosButton` in `src/components/albums/AddPhotosButton.tsx`: non-blocking inline list of rejected file names and reasons
+- [X] T059 [P] Verify lightbox wrap-around edge cases in `Lightbox` in `src/components/photos/Lightbox.tsx`: navigating backwards from first photo jumps to last; forwards from last jumps to first
+- [X] T060 Run full test suite and verify coverage: `npm run test:all` — all tests green; `npm run test:coverage` — ≥ 80% lines
+- [X] T061 Run `npm run lint` and `npm run format` — fix all lint and formatting issues
+- [X] T062 Run quickstart.md validation checklist end-to-end: create album, add photos, export, close, re-import, verify state restored, drag to reorder, view lightbox, trash photo, restore
 
 ---
 

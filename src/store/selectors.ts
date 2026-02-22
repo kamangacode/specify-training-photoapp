@@ -5,9 +5,7 @@ export function getAlbumById(state: AppState, albumId: string): Album | undefine
 }
 
 export function getPhotosByAlbum(state: AppState, albumId: string): Photo[] {
-  return Object.values(state.photos).filter(
-    (p) => p.status === 'active' && p.albumId === albumId
-  );
+  return Object.values(state.photos).filter((p) => p.status === 'active' && p.albumId === albumId);
 }
 
 export function getTrashedPhotos(state: AppState): Photo[] {
@@ -57,18 +55,16 @@ export function getSortedPhotos(state: AppState, albumId: string): Photo[] {
   }
 
   // date mode: oldest first
-  return photos.slice().sort(
-    (a, b) => new Date(a.dateTaken).getTime() - new Date(b.dateTaken).getTime()
-  );
+  return photos
+    .slice()
+    .sort((a, b) => new Date(a.dateTaken).getTime() - new Date(b.dateTaken).getTime());
 }
 
 /** Returns albums sorted by latest photo date (most recent first) when the user hasn't
  *  custom-ordered yet; returns albumOrder sequence when isCustomOrdered is true. */
 export function getOrderedAlbums(state: AppState): Album[] {
   if (state.isCustomOrdered) {
-    return state.albumOrder
-      .map((id) => state.albums[id])
-      .filter((a): a is Album => !!a);
+    return state.albumOrder.map((id) => state.albums[id]).filter((a): a is Album => !!a);
   }
 
   // Default: sort by latest photo date, most recent first

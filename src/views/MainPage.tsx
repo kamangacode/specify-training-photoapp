@@ -29,10 +29,7 @@ export function MainPage({ onOpenAlbum }: MainPageProps) {
       {showCreateForm && <AlbumForm onClose={() => setShowCreateForm(false)} />}
 
       <main>
-        <AlbumGrid
-          onOpenAlbum={onOpenAlbum}
-          onCreateAlbum={() => setShowCreateForm(true)}
-        />
+        <AlbumGrid onOpenAlbum={onOpenAlbum} onCreateAlbum={() => setShowCreateForm(true)} />
       </main>
     </div>
   );

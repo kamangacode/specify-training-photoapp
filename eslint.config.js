@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import globals from 'globals';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
@@ -25,6 +26,11 @@ export default [
         ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.es2020,
+        React: 'readonly',
       },
     },
     plugins: {

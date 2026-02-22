@@ -67,7 +67,13 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
             <img
               src={coverSrc}
               alt=""
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
             />
           )}
         </div>
@@ -100,7 +106,11 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
             <button
               type="button"
               aria-label={`Rename album ${album.name}`}
-              onClick={(e) => { e.stopPropagation(); setRenameValue(album.name); setIsRenaming(true); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setRenameValue(album.name);
+                setIsRenaming(true);
+              }}
               style={{ fontSize: '0.75rem' }}
             >
               Rename
@@ -108,7 +118,10 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
             <button
               type="button"
               aria-label={`Delete album ${album.name}`}
-              onClick={(e) => { e.stopPropagation(); setShowDeleteConfirm(true); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDeleteConfirm(true);
+              }}
               style={{ fontSize: '0.75rem' }}
             >
               Delete
@@ -122,7 +135,10 @@ export function AlbumCard({ album, onClick }: AlbumCardProps) {
           title="Delete Album"
           message={`Delete "${album.name}"? All photos will be moved to Trash.`}
           confirmLabel="Delete"
-          onConfirm={() => { deleteAlbum(album.id); setShowDeleteConfirm(false); }}
+          onConfirm={() => {
+            deleteAlbum(album.id);
+            setShowDeleteConfirm(false);
+          }}
           onCancel={() => setShowDeleteConfirm(false)}
         />
       )}

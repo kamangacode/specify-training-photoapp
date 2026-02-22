@@ -15,11 +15,7 @@ export class ExportError extends Error {
 
 export class ImportError extends Error {
   readonly code: 'INVALID_FILE' | 'MISSING_MANIFEST' | 'CORRUPT_DATA' | 'VERSION_MISMATCH';
-  constructor(
-    code: ImportError['code'],
-    message: string,
-    cause?: unknown
-  ) {
+  constructor(code: ImportError['code'], message: string, cause?: unknown) {
     super(message);
     this.name = 'ImportError';
     this.code = code;
@@ -95,7 +91,11 @@ export async function importFromFile(
     const json = await manifestFile.async('text');
     manifest = JSON.parse(json) as SaveFileManifest;
   } catch (err) {
-    throw new ImportError('CORRUPT_DATA', 'Invalid save file: manifest.json could not be parsed.', err);
+    throw new ImportError(
+      'CORRUPT_DATA',
+      'Invalid save file: manifest.json could not be parsed.',
+      err
+    );
   }
 
   // Version check
