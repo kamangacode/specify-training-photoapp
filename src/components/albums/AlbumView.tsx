@@ -7,6 +7,7 @@ import { AddPhotosButton } from './AddPhotosButton';
 import { EmptyState } from '../common/EmptyState';
 import { useLightbox } from '../../hooks/useLightbox';
 import { usePhotos } from '../../hooks/usePhotos';
+import styles from './AlbumView.module.css';
 
 interface AlbumViewProps {
   albumId: string;
@@ -22,7 +23,7 @@ export function AlbumView({ albumId, onBack }: AlbumViewProps) {
 
   if (!album) {
     return (
-      <div data-testid="album-view">
+      <div data-testid="album-view" className={styles.view}>
         <EmptyState message="Album not found." action={{ label: 'Back', onClick: onBack }} />
       </div>
     );
@@ -31,32 +32,26 @@ export function AlbumView({ albumId, onBack }: AlbumViewProps) {
   const allPhotos = getSortedPhotos(state, albumId);
 
   return (
-    <div data-testid="album-view">
-      <header
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.75rem',
-          padding: '0.75rem 1rem',
-          borderBottom: '1px solid #eee',
-        }}
-      >
-        <button type="button" onClick={onBack} aria-label="Back to albums">
+    <div data-testid="album-view" className={styles.view}>
+      <header className={styles.header}>
+        <button type="button" onClick={onBack} aria-label="Back to albums" className={styles.backButton}>
           ← Back
         </button>
-        <h1 style={{ margin: 0, fontSize: '1.25rem', flex: 1 }}>{album.name}</h1>
+        <h1 className={styles.albumTitle}>{album.name}</h1>
         <SortToggle albumId={albumId} currentMode={album.photoSortMode} onToggle={setSortMode} />
         <AddPhotosButton albumId={albumId} />
       </header>
 
-      <PhotoGrid
-        albumId={albumId}
-        photos={allPhotos}
-        photoSortMode={album.photoSortMode}
-        onOpen={lightbox.open}
-        onTrash={trashPhoto}
-        onReorder={reorderPhotos}
-      />
+      <main className={styles.body}>
+        <PhotoGrid
+          albumId={albumId}
+          photos={allPhotos}
+          photoSortMode={album.photoSortMode}
+          onOpen={lightbox.open}
+          onTrash={trashPhoto}
+          onReorder={reorderPhotos}
+        />
+      </main>
 
       {lightbox.isOpen && lightbox.activePhotoId && (
         <Lightbox

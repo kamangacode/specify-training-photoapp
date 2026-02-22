@@ -1,3 +1,5 @@
+import styles from './EmptyState.module.css';
+
 interface EmptyStateProps {
   message: string;
   action?: {
@@ -8,10 +10,10 @@ interface EmptyStateProps {
 
 export function EmptyState({ message, action }: EmptyStateProps) {
   return (
-    <div role="status" aria-label={message} style={{ textAlign: 'center', padding: '2rem' }}>
-      <p>{message}</p>
+    <div role="status" aria-label={message} className={styles.container}>
+      <p className={styles.message}>{message}</p>
       {action && (
-        <button type="button" onClick={action.onClick}>
+        <button type="button" onClick={action.onClick} className={styles.actionButton}>
           {action.label}
         </button>
       )}

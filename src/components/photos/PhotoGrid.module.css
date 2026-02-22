@@ -1,0 +1,19 @@
+/* =====================================================================
+   PhotoGrid — Responsive Photo Grid Layout
+   Feature: 001-modern-ui / US2
+   ===================================================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--gap-grid);
+  padding: var(--padding-section);
+}
+
+.emptyWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: var(--padding-section);
+}
