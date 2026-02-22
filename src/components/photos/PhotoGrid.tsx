@@ -19,6 +19,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { EmptyState } from '../common/EmptyState';
 import { PhotoTile } from './PhotoTile';
 import type { Photo } from '../../models/types';
+import styles from './PhotoGrid.module.css';
 
 interface SortablePhotoTileProps {
   photo: Photo;
@@ -37,15 +38,7 @@ function SortablePhotoTile({ photo, visible, onOpen, onTrash }: SortablePhotoTil
   };
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {visible ? (
-        <PhotoTile photo={photo} onOpen={onOpen} onTrash={onTrash} />
-      ) : (
-        <div
-          data-testid="photo-skeleton"
-          aria-hidden="true"
-          style={{ aspectRatio: '1', background: '#ddd', borderRadius: '4px' }}
-        />
-      )}
+      <PhotoTile photo={photo} onOpen={onOpen} onTrash={onTrash} isLoading={!visible} />
     </div>
   );
 }
@@ -101,7 +94,7 @@ export function PhotoGrid({
 
   if (photos.length === 0) {
     return (
-      <div data-testid="photo-grid-empty">
+      <div data-testid="photo-grid-empty" className={styles.emptyWrapper}>
         <EmptyState message="No photos in this album yet." />
       </div>
     );
@@ -119,18 +112,11 @@ export function PhotoGrid({
     onReorder?.(albumId, newOrder);
   }
 
-  const gridStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-    gap: '0.5rem',
-    padding: '1rem',
-  };
-
   if (photoSortMode === 'manual') {
     return (
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={photos.map((p) => p.id)} strategy={rectSortingStrategy}>
-          <div ref={containerRef} data-testid="photo-grid" style={gridStyle}>
+          <div ref={containerRef} data-testid="photo-grid" className={styles.grid}>
             {photos.map((photo) => (
               <div key={photo.id} data-photo-id={photo.id}>
                 <SortablePhotoTile
@@ -148,18 +134,15 @@ export function PhotoGrid({
   }
 
   return (
-    <div ref={containerRef} data-testid="photo-grid" style={gridStyle}>
+    <div ref={containerRef} data-testid="photo-grid" className={styles.grid}>
       {photos.map((photo) => (
         <div key={photo.id} data-photo-id={photo.id}>
-          {visibleIds.has(photo.id) ? (
-            <PhotoTile photo={photo} onOpen={onOpen} onTrash={onTrash} />
-          ) : (
-            <div
-              data-testid="photo-skeleton"
-              aria-hidden="true"
-              style={{ aspectRatio: '1', background: '#ddd', borderRadius: '4px' }}
-            />
-          )}
+          <PhotoTile
+            photo={photo}
+            onOpen={onOpen}
+            onTrash={onTrash}
+            isLoading={!visibleIds.has(photo.id)}
+          />
         </div>
       ))}
     </div>

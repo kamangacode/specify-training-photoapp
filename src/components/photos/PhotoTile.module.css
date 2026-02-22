@@ -1,0 +1,134 @@
+/* =====================================================================
+   PhotoTile — Modern Photo Gallery Card
+   Feature: 001-modern-ui / US2
+   ===================================================================== */
+
+.tile {
+  position: relative;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  cursor: pointer;
+}
+
+.tile:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.tile:active {
+  box-shadow: var(--shadow-sm);
+  transform: scale(0.97);
+}
+
+/* --- Image wrapper --- */
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--color-surface-subtle);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.tile:hover .img {
+  transform: scale(1.05);
+}
+
+/* --- Hover overlay --- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay-light);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile:hover .overlay {
+  opacity: 1;
+}
+
+/* --- Trash button --- */
+
+.trashButton {
+  position: absolute;
+  top: var(--spacing-2);
+  right: var(--spacing-2);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-1) var(--spacing-2);
+  cursor: pointer;
+  font-size: var(--font-size-body-xs);
+  font-family: inherit;
+  transition: background var(--transition-fast);
+  z-index: 1;
+}
+
+.trashButton:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.trashButton:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* --- Error placeholder --- */
+
+.errorPlaceholder {
+  aspect-ratio: 1;
+  width: 100%;
+  background: var(--color-surface-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-body-xs);
+}
+
+/* --- Skeleton loading --- */
+
+.skeletonWrapper {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: calc(1200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-subtle) 25%,
+    var(--color-bg-secondary) 50%,
+    var(--color-surface-subtle) 75%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 2s infinite;
+}
