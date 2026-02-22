@@ -105,10 +105,30 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 6. Execute implementation following the task plan:
    - **Phase-by-phase execution**: Complete each phase before moving to the next
-   - **Respect dependencies**: Run sequential tasks in order, parallel tasks [P] can run together  
+   - **Respect dependencies**: Run sequential tasks in order, parallel tasks [P] can run together
    - **Follow TDD approach**: Execute test tasks before their corresponding implementation tasks
    - **File-based coordination**: Tasks affecting the same files must run sequentially
    - **Validation checkpoints**: Verify each phase completion before proceeding
+
+   **Git branching per User Story**: Before starting each phase that contains `[USN]` tasks:
+   - Identify the US number N (e.g., `[US1]`, `[US2]`)
+   - Record the current feature branch name: `git rev-parse --abbrev-ref HEAD`
+     - If currently on a US branch from a previous phase, switch back to the feature branch first: `git checkout <feature-branch>`
+   - Create and checkout a dedicated US branch:
+     ```bash
+     git checkout -b <feature-branch>-us<N>
+     ```
+   - Execute all `[USN]` tasks on this branch
+   - After all tasks in the US phase pass validation:
+     - Push the US branch: `git push -u origin <feature-branch>-us<N>`
+     - Create a PR targeting the **feature branch** (NOT main):
+       ```bash
+       gh pr create --title "[US<N>] <US description from spec>" \
+         --base <feature-branch> \
+         --body "## User Story <N>\n\n**Tasks completed**: <list task IDs>\n\n**Test results**: <summary>"
+       ```
+     - Report the PR URL
+   - Switch back to the feature branch: `git checkout <feature-branch>`
 
 7. Implementation execution rules:
    - **Setup first**: Initialize project structure, dependencies, configuration
@@ -131,5 +151,17 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Validate that tests pass and coverage meets requirements
    - Confirm the implementation follows the technical plan
    - Report final status with summary of completed work
+
+10. **Final Push and Pull Request**:
+    - Verify remote is GitHub: `git config --get remote.origin.url` (skip entirely if not a GitHub URL)
+    - Ensure we are on the feature branch: `git checkout <feature-branch>`
+    - Push the feature branch: `git push -u origin <feature-branch>`
+    - Create the final PR targeting **main** (or the repository's default branch):
+      ```bash
+      gh pr create --title "feat: <feature-branch>" \
+        --base main \
+        --body "## Summary\n\n<implementation summary>\n\n## User Stories implemented\n\n<list of US PRs>\n\n## Test results\n\n<summary>\n\nCloses #<issue-number from speckit.plan>"
+      ```
+    - Report the final PR URL to the user
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit.tasks` first to regenerate the task list.

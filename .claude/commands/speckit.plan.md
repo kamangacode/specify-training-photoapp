@@ -35,6 +35,14 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 4. **Stop and report**: Command ends after Phase 2 planning. Report branch, IMPL_PLAN path, and generated artifacts.
 
+5. **Create GitHub Issue**: After reporting, create a GitHub issue to track this feature:
+   - Verify remote is GitHub: `git config --get remote.origin.url` (skip entirely if not a GitHub URL)
+   - Get current branch name: `git rev-parse --abbrev-ref HEAD`
+   - Create issue using `gh issue create`:
+     - **Title**: `feat: <branch-name>`
+     - **Body**: Feature description (from spec.md summary), branch name, list of generated artifacts (research.md, data-model.md, contracts/), key design decisions from research.md
+   - Report the issue URL and issue number to the user — **save the issue number**, it will be referenced in the final PR
+
 ## Phases
 
 ### Phase 0: Outline & Research
