@@ -41,11 +41,6 @@ export function AlbumCard({ album, onClick, isLoading = false, isSelected = fals
     setIsRenaming(false);
   }
 
-  function handleCardClick(e: React.MouseEvent) {
-    if ((e.target as HTMLElement).closest('button, input')) return;
-    onClick(album.id);
-  }
-
   if (isLoading) {
     return (
       <div className={styles.card} aria-busy="true" aria-label="Loading album">
@@ -62,61 +57,59 @@ export function AlbumCard({ album, onClick, isLoading = false, isSelected = fals
     <>
       <article
         data-testid="album-card"
-        onClick={handleCardClick}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            if (!(e.target as HTMLElement).closest('button, input')) onClick(album.id);
-          }
-        }}
-        tabIndex={0}
-        role="button"
-        aria-label={`Open album ${album.name}`}
         className={`${styles.card}${isSelected ? ` ${styles.isSelected}` : ''}`}
       >
-        <div data-testid="album-cover" className={styles.imageWrapper} aria-hidden="true">
-          {coverSrc && !imgError ? (
-            <>
-              <img
-                src={coverSrc}
-                alt=""
-                className={styles.img}
-                onError={() => setImgError(true)}
-              />
+        {/* Open-album action — a proper button (not role="button" on article) */}
+        <button
+          type="button"
+          aria-label={`Open album ${album.name}`}
+          onClick={() => onClick(album.id)}
+          className={styles.openArea}
+        >
+          <div data-testid="album-cover" className={styles.imageWrapper} aria-hidden="true">
+            {coverSrc && !imgError ? (
+              <>
+                <img
+                  src={coverSrc}
+                  alt=""
+                  className={styles.img}
+                  onError={() => setImgError(true)}
+                />
+                <div className={styles.overlay} />
+              </>
+            ) : (
               <div className={styles.overlay} />
-            </>
-          ) : (
-            <div className={styles.overlay} />
-          )}
-        </div>
+            )}
+          </div>
 
-        <div className={styles.text}>
-          {isRenaming ? (
-            <form onSubmit={handleRenameSubmit}>
-              <input
-                type="text"
-                value={renameValue}
-                onChange={(e) => setRenameValue(e.target.value)}
-                aria-label="Rename album"
-                autoFocus
-                onBlur={() => setIsRenaming(false)}
-                className={styles.renameInput}
-              />
-            </form>
-          ) : (
+          <div className={styles.text}>
             <h2 className={styles.title}>{album.name}</h2>
-          )}
+            <p className={styles.meta}>
+              {photoCount} {photoCount === 1 ? 'photo' : 'photos'}
+            </p>
+            <p className={styles.meta}>{formatDateRange(dateRange)}</p>
+          </div>
+        </button>
 
-          <p className={styles.meta}>
-            {photoCount} {photoCount === 1 ? 'photo' : 'photos'}
-          </p>
-          <p className={styles.meta}>{formatDateRange(dateRange)}</p>
-
+        {/* Rename/Delete actions — siblings of the open button, NOT nested */}
+        {isRenaming ? (
+          <form onSubmit={handleRenameSubmit} className={styles.text}>
+            <input
+              type="text"
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              aria-label="Rename album"
+              autoFocus
+              onBlur={() => setIsRenaming(false)}
+              className={styles.renameInput}
+            />
+          </form>
+        ) : (
           <div className={styles.actions}>
             <button
               type="button"
               aria-label={`Rename album ${album.name}`}
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
                 setRenameValue(album.name);
                 setIsRenaming(true);
               }}
@@ -127,16 +120,13 @@ export function AlbumCard({ album, onClick, isLoading = false, isSelected = fals
             <button
               type="button"
               aria-label={`Delete album ${album.name}`}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowDeleteConfirm(true);
-              }}
+              onClick={() => setShowDeleteConfirm(true)}
               className={styles.actionButton}
             >
               Delete
             </button>
           </div>
-        </div>
+        )}
       </article>
 
       {showDeleteConfirm && (

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import styles from './ConfirmDialog.module.css';
 
 interface ConfirmDialogProps {
   title: string;
@@ -21,7 +22,6 @@ export function ConfirmDialog({
   const cancelBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // Trap focus inside dialog and close on Escape
     dialogRef.current?.showModal();
     cancelBtnRef.current?.focus();
 
@@ -42,14 +42,15 @@ export function ConfirmDialog({
       aria-labelledby="confirm-title"
       aria-describedby="confirm-message"
       onClose={onCancel}
+      className={styles.dialog}
     >
-      <h2 id="confirm-title">{title}</h2>
-      <p id="confirm-message">{message}</p>
-      <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-        <button ref={cancelBtnRef} type="button" onClick={onCancel}>
+      <h2 id="confirm-title" className={styles.title}>{title}</h2>
+      <p id="confirm-message" className={styles.message}>{message}</p>
+      <div className={styles.actions}>
+        <button ref={cancelBtnRef} type="button" onClick={onCancel} className={styles.cancelButton}>
           {cancelLabel}
         </button>
-        <button type="button" onClick={onConfirm}>
+        <button type="button" onClick={onConfirm} className={styles.confirmButton}>
           {confirmLabel}
         </button>
       </div>
