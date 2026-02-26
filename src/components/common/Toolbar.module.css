@@ -1,15 +1,27 @@
 .toolbar {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-6);
   background-color: var(--color-bg-primary);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
+}
+
+.toolbarInner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--spacing-6);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
   flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .toolbarInner {
+    padding: 0 var(--spacing-3);
+  }
 }
 
 /* ---- Button base ---- */

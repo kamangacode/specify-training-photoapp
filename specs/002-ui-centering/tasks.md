@@ -48,13 +48,13 @@
 
 ### Implémentation US2
 
-- [ ] T006 [US2] Ajouter `.toolbarInner` dans `src/components/common/Toolbar.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; padding: 0 var(--spacing-6); display: flex; align-items: center; gap: var(--spacing-2); flex-wrap: wrap;` + media query mobile
-- [ ] T007 [US2] Wrapper le contenu de `Toolbar.tsx` dans `<div className={styles.toolbarInner}>` — les boutons Export/Import/Trash et l'input hidden deviennent enfants de ce wrapper
-- [ ] T008 [US2] Ajouter `.pageHeaderInner` dans `src/views/MainPage.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-4); padding: 0 var(--spacing-6);` + media query mobile
-- [ ] T009 [US2] Wrapper le contenu du `<header>` dans `MainPage.tsx` dans `<div className={styles.pageHeaderInner}>` (h1 + create button)
-- [ ] T010 [US2] Ajouter `.headerInner` dans `src/components/albums/AlbumView.module.css` : mêmes règles flex que T008
-- [ ] T011 [US2] Wrapper le contenu du header dans `AlbumView.tsx` dans `<div className={styles.headerInner}>` (back button + title + actions)
-- [ ] T012 [US2] Ajouter les scénarios US2-01 à US2-03 dans `tests/e2e/ui-centering.spec.ts`
+- [X] T006 [US2] Ajouter `.toolbarInner` dans `src/components/common/Toolbar.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; padding: 0 var(--spacing-6); display: flex; align-items: center; gap: var(--spacing-2); flex-wrap: wrap;` + media query mobile
+- [X] T007 [US2] Wrapper le contenu de `Toolbar.tsx` dans `<div className={styles.toolbarInner}>` — les boutons Export/Import/Trash et l'input hidden deviennent enfants de ce wrapper
+- [X] T008 [US2] Ajouter `.pageHeaderInner` dans `src/views/MainPage.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-4); padding: 0 var(--spacing-6);` + media query mobile
+- [X] T009 [US2] Wrapper le contenu du `<header>` dans `MainPage.tsx` dans `<div className={styles.pageHeaderInner}>` (h1 + create button)
+- [X] T010 [US2] Ajouter `.headerInner` dans `src/components/albums/AlbumView.module.css` : mêmes règles flex que T008
+- [X] T011 [US2] Wrapper le contenu du header dans `AlbumView.tsx` dans `<div className={styles.headerInner}>` (back button + title + actions)
+- [X] T012 [US2] Ajouter les scénarios US2-01 à US2-03 dans `tests/e2e/ui-centering.spec.ts`
 
 **Checkpoint**: Toolbar et headers alignés avec le contenu → US2 testable indépendamment
 

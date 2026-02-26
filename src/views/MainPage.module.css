@@ -6,13 +6,25 @@
 }
 
 .pageHeader {
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pageHeaderInner {
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--spacing-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-4);
-  padding: var(--spacing-5) var(--spacing-6);
-  background-color: var(--color-bg-primary);
-  border-bottom: 1px solid var(--color-border);
+}
+
+@media (max-width: 640px) {
+  .pageHeaderInner {
+    padding: 0 var(--spacing-3);
+  }
 }
 
 .pageTitle {

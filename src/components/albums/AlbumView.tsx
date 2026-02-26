@@ -34,12 +34,14 @@ export function AlbumView({ albumId, onBack }: AlbumViewProps) {
   return (
     <div data-testid="album-view" className={styles.view}>
       <header className={styles.header}>
-        <button type="button" onClick={onBack} aria-label="Back to albums" className={styles.backButton}>
-          ← Back
-        </button>
-        <h1 className={styles.albumTitle}>{album.name}</h1>
-        <SortToggle albumId={albumId} currentMode={album.photoSortMode} onToggle={setSortMode} />
-        <AddPhotosButton albumId={albumId} />
+        <div className={styles.headerInner}>
+          <button type="button" onClick={onBack} aria-label="Back to albums" className={styles.backButton}>
+            ← Back
+          </button>
+          <h1 className={styles.albumTitle}>{album.name}</h1>
+          <SortToggle albumId={albumId} currentMode={album.photoSortMode} onToggle={setSortMode} />
+          <AddPhotosButton albumId={albumId} />
+        </div>
       </header>
 
       <main className={styles.body}>

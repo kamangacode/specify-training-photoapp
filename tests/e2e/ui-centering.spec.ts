@@ -132,3 +132,88 @@ test.describe('US1 — Centered Content Layout', () => {
     expect(Math.abs(leftOffset - rightOffset)).toBeLessThanOrEqual(2);
   });
 });
+
+/**
+ * US2 — Centered Page Headers & Toolbar (T012)
+ * Scenarios: US2-01 to US2-03
+ * Contract: specs/002-ui-centering/contracts/e2e-scenarios.md
+ */
+test.describe('US2 — Centered Page Headers & Toolbar', () => {
+  // -----------------------------------------------------------------------
+  // US2-01: Toolbar inner wrapper aligns with album grid on wide screen
+  // -----------------------------------------------------------------------
+  test('US2-01: toolbar inner wrapper left edge aligns with album grid left edge on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    await createAlbum(page, 'US2-01 Album');
+
+    // The toolbarInner div is the first child of the toolbar
+    const toolbarInner = page.locator('[data-testid="toolbar"] > div').first();
+    const albumGrid = page.locator('[data-testid="album-grid"], [data-testid="album-grid-empty"]').first();
+
+    const toolbarBox = await toolbarInner.boundingBox();
+    const gridBox = await albumGrid.boundingBox();
+
+    expect(toolbarBox).not.toBeNull();
+    expect(gridBox).not.toBeNull();
+
+    // Toolbar inner wrapper left edge must align with album grid left edge (within 2px)
+    expect(Math.abs(toolbarBox!.x - gridBox!.x)).toBeLessThanOrEqual(2);
+  });
+
+  // -----------------------------------------------------------------------
+  // US2-02: Album view header aligns with photo grid on wide screen
+  // -----------------------------------------------------------------------
+  test('US2-02: album view header inner left edge aligns with photo grid left edge on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    await createAlbum(page, 'US2-02 Album');
+
+    // Open the album
+    await page.getByText('US2-02 Album').click();
+    await page.waitForSelector('[data-testid="album-view"]');
+
+    // The headerInner div is the first child of the album view header
+    const headerInner = page.locator('[data-testid="album-view"] header > div').first();
+    const photoGrid = page.locator('[data-testid="photo-grid"], [data-testid="photo-grid-empty"]').first();
+
+    const headerBox = await headerInner.boundingBox();
+    const gridBox = await photoGrid.boundingBox();
+
+    expect(headerBox).not.toBeNull();
+    expect(gridBox).not.toBeNull();
+
+    // Header inner container left edge must align with photo grid left edge (within 2px)
+    expect(Math.abs(headerBox!.x - gridBox!.x)).toBeLessThanOrEqual(2);
+  });
+
+  // -----------------------------------------------------------------------
+  // US2-03: Trash page header back button aligns with trash list on wide screen
+  // -----------------------------------------------------------------------
+  test('US2-03: trash page header back button left edge aligns with trash content left edge on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    // Navigate to trash view
+    await page.getByRole('button', { name: /open trash/i }).click();
+    await page.waitForSelector('[data-testid="trash-page"]');
+
+    // Back button in the trash page header
+    const backButton = page.getByRole('button', { name: /back to albums/i });
+    const backBox = await backButton.boundingBox();
+    expect(backBox).not.toBeNull();
+
+    // Align against the trash content area (items or empty state)
+    const trashContent = page.locator('[data-testid="trash-view"], [data-testid="trash-view-empty"]').first();
+    const trashBox = await trashContent.boundingBox();
+    expect(trashBox).not.toBeNull();
+
+    // Back button left edge must align with trash content left edge (within 2px)
+    expect(Math.abs(backBox!.x - trashBox!.x)).toBeLessThanOrEqual(2);
+  });
+});

@@ -13,14 +13,16 @@ export function MainPage({ onOpenAlbum }: MainPageProps) {
   return (
     <div data-testid="main-page" className={styles.page}>
       <header className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Photo Albums</h1>
-        <button
-          type="button"
-          className={styles.createButton}
-          onClick={() => setShowCreateForm(true)}
-        >
-          Create Album
-        </button>
+        <div className={styles.pageHeaderInner}>
+          <h1 className={styles.pageTitle}>Photo Albums</h1>
+          <button
+            type="button"
+            className={styles.createButton}
+            onClick={() => setShowCreateForm(true)}
+          >
+            Create Album
+          </button>
+        </div>
       </header>
 
       {showCreateForm && <AlbumForm onClose={() => setShowCreateForm(false)} />}
