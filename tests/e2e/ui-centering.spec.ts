@@ -217,3 +217,92 @@ test.describe('US2 — Centered Page Headers & Toolbar', () => {
     expect(Math.abs(backBox!.x - trashBox!.x)).toBeLessThanOrEqual(2);
   });
 });
+
+/**
+ * US3 — Centered Empty States & Dialogs (T016 + T016b)
+ * Scenarios: US3-01 to US3-04
+ * Contract: specs/002-ui-centering/contracts/e2e-scenarios.md
+ */
+test.describe('US3 — Centered Empty States & Dialogs', () => {
+  // -----------------------------------------------------------------------
+  // US3-01: Empty album list is horizontally centered on wide viewport
+  // -----------------------------------------------------------------------
+  test('US3-01: empty album list empty state is horizontally centered on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    // Ensure there are no albums so the empty state is shown
+    // (fresh app state has no albums by default)
+    const emptyWrapper = page.locator('[data-testid="album-grid-empty"]');
+    await emptyWrapper.waitFor({ state: 'visible' });
+
+    const emptyState = emptyWrapper.locator('[role="status"]');
+    const boundingBox = await emptyState.boundingBox();
+    expect(boundingBox).not.toBeNull();
+
+    const viewportWidth = 1440;
+    const leftOffset = boundingBox!.x;
+    const rightOffset = viewportWidth - (boundingBox!.x + boundingBox!.width);
+
+    // Empty state must be horizontally centered (within 4px tolerance)
+    expect(Math.abs(leftOffset - rightOffset)).toBeLessThanOrEqual(4);
+  });
+
+  // -----------------------------------------------------------------------
+  // US3-02: Empty album view (no photos) is horizontally centered on wide viewport
+  // -----------------------------------------------------------------------
+  test('US3-02: empty photo grid empty state is horizontally centered on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    // Create an album (it will have no photos)
+    await createAlbum(page, 'US3-02 Empty Album');
+
+    // Open the album
+    await page.getByText('US3-02 Empty Album').click();
+    await page.waitForSelector('[data-testid="album-view"]');
+
+    const emptyWrapper = page.locator('[data-testid="photo-grid-empty"]');
+    await emptyWrapper.waitFor({ state: 'visible' });
+
+    const emptyState = emptyWrapper.locator('[role="status"]');
+    const boundingBox = await emptyState.boundingBox();
+    expect(boundingBox).not.toBeNull();
+
+    const viewportWidth = 1440;
+    const leftOffset = boundingBox!.x;
+    const rightOffset = viewportWidth - (boundingBox!.x + boundingBox!.width);
+
+    // Empty state must be horizontally centered (within 4px tolerance)
+    expect(Math.abs(leftOffset - rightOffset)).toBeLessThanOrEqual(4);
+  });
+
+  // -----------------------------------------------------------------------
+  // US3-03: Empty trash is horizontally centered on wide viewport
+  // -----------------------------------------------------------------------
+  test('US3-03: empty trash empty state is horizontally centered on 1440px viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    await page.waitForSelector('[data-testid="main-page"]');
+
+    // Navigate to trash (which is empty by default)
+    await page.getByRole('button', { name: /open trash/i }).click();
+    await page.waitForSelector('[data-testid="trash-page"]');
+
+    const emptyWrapper = page.locator('[data-testid="trash-view-empty"]');
+    await emptyWrapper.waitFor({ state: 'visible' });
+
+    const emptyState = emptyWrapper.locator('[role="status"]');
+    const boundingBox = await emptyState.boundingBox();
+    expect(boundingBox).not.toBeNull();
+
+    const viewportWidth = 1440;
+    const leftOffset = boundingBox!.x;
+    const rightOffset = viewportWidth - (boundingBox!.x + boundingBox!.width);
+
+    // Empty state must be horizontally centered (within 4px tolerance)
+    expect(Math.abs(leftOffset - rightOffset)).toBeLessThanOrEqual(4);
+  });
+});
