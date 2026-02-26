@@ -17,7 +17,7 @@
 
 **Purpose**: Ajouter le token CSS fondamental — bloque toutes les USs
 
-- [ ] T001 Ajouter `--page-max-width: 1100px` dans `src/styles/tokens.css` (section Sizes ou Layout)
+- [X] T001 Ajouter `--page-max-width: 1100px` dans `src/styles/tokens.css` (section Sizes ou Layout)
 
 **Checkpoint**: Token disponible → US1 peut commencer
 
@@ -31,10 +31,10 @@
 
 ### Implémentation US1
 
-- [ ] T002 [US1] Ajouter max-width centering à `.main` dans `src/views/MainPage.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; padding: 0 var(--spacing-6);` + media query mobile `@media (max-width: 640px)` avec `max-width: none; padding: 0 var(--spacing-3);`
-- [ ] T003 [US1] Ajouter max-width centering à `.body` dans `src/components/albums/AlbumView.module.css` : même règles que T002
-- [ ] T004 [US1] Ajouter max-width centering à `.main` dans `src/views/TrashPage.module.css` : même règles que T002
-- [ ] T005 [US1] Créer `tests/e2e/ui-centering.spec.ts` avec les scénarios US1-01 à US1-04 du contrat `contracts/e2e-scenarios.md` (viewport tests avec `page.setViewportSize()`)
+- [X] T002 [US1] Ajouter max-width centering à `.main` dans `src/views/MainPage.module.css` : `max-width: var(--page-max-width); margin: 0 auto; width: 100%; padding: 0 var(--spacing-6);` + media query mobile `@media (max-width: 640px)` avec `max-width: none; padding: 0 var(--spacing-3);`
+- [X] T003 [US1] Ajouter max-width centering à `.body` dans `src/components/albums/AlbumView.module.css` : même règles que T002
+- [X] T004 [US1] Ajouter max-width centering à `.main` dans `src/views/TrashPage.module.css` : même règles que T002
+- [X] T005 [US1] Créer `tests/e2e/ui-centering.spec.ts` avec les scénarios US1-01 à US1-04 du contrat `contracts/e2e-scenarios.md` (viewport tests avec `page.setViewportSize()`)
 
 **Checkpoint**: Album grid, photo grid et trash list sont centrés à 1440px → US1 testable indépendamment
 
