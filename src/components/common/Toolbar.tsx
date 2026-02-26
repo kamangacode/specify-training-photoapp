@@ -50,65 +50,67 @@ export function Toolbar({ onOpenTrash }: ToolbarProps) {
 
   return (
     <div data-testid="toolbar" className={styles.toolbar}>
-      <UnsavedBadge />
+      <div className={styles.toolbarInner}>
+        <UnsavedBadge />
 
-      <button
-        type="button"
-        onClick={() => void handleExport()}
-        aria-label="Export save file"
-        className={styles.buttonSecondary}
-      >
-        Export
-      </button>
+        <button
+          type="button"
+          onClick={() => void handleExport()}
+          aria-label="Export save file"
+          className={styles.buttonSecondary}
+        >
+          Export
+        </button>
 
-      <input
-        ref={importInputRef}
-        type="file"
-        accept=".zip,.photoalbum.zip,application/zip"
-        onChange={handleImportChange}
-        className={styles.hiddenInput}
-        aria-label="Select save file to import"
-      />
-      <button
-        type="button"
-        onClick={() => importInputRef.current?.click()}
-        aria-label="Import save file"
-        className={styles.buttonSecondary}
-      >
-        Import
-      </button>
-
-      <button
-        type="button"
-        onClick={onOpenTrash}
-        aria-label="Open trash"
-        className={styles.buttonSecondary}
-      >
-        Trash
-      </button>
-
-      {importError && (
-        <p role="alert" className={styles.errorMessage}>
-          {importError}
-        </p>
-      )}
-
-      {showUnsavedWarning && pendingImportFile && (
-        <ConfirmDialog
-          title="Unsaved Changes"
-          message="You have unsaved changes. Importing will replace all current data. Continue?"
-          confirmLabel="Import Anyway"
-          onConfirm={() => {
-            setShowUnsavedWarning(false);
-            void doImport(pendingImportFile);
-            setPendingImportFile(null);
-          }}
-          onCancel={() => {
-            setShowUnsavedWarning(false);
-            setPendingImportFile(null);
-          }}
+        <input
+          ref={importInputRef}
+          type="file"
+          accept=".zip,.photoalbum.zip,application/zip"
+          onChange={handleImportChange}
+          className={styles.hiddenInput}
+          aria-label="Select save file to import"
         />
-      )}
+        <button
+          type="button"
+          onClick={() => importInputRef.current?.click()}
+          aria-label="Import save file"
+          className={styles.buttonSecondary}
+        >
+          Import
+        </button>
+
+        <button
+          type="button"
+          onClick={onOpenTrash}
+          aria-label="Open trash"
+          className={styles.buttonSecondary}
+        >
+          Trash
+        </button>
+
+        {importError && (
+          <p role="alert" className={styles.errorMessage}>
+            {importError}
+          </p>
+        )}
+
+        {showUnsavedWarning && pendingImportFile && (
+          <ConfirmDialog
+            title="Unsaved Changes"
+            message="You have unsaved changes. Importing will replace all current data. Continue?"
+            confirmLabel="Import Anyway"
+            onConfirm={() => {
+              setShowUnsavedWarning(false);
+              void doImport(pendingImportFile);
+              setPendingImportFile(null);
+            }}
+            onCancel={() => {
+              setShowUnsavedWarning(false);
+              setPendingImportFile(null);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }
