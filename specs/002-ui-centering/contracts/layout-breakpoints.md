@@ -1,6 +1,6 @@
 # UI Contract: Responsive Layout Breakpoints
 
-**Feature**: `001-ui-centering`
+**Feature**: `002-ui-centering`
 **Type**: UI Layout Contract
 **Applies to**: MainPage, AlbumViewPage, TrashPage — main content area + toolbar inner content
 

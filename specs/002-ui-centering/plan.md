@@ -1,7 +1,7 @@
 # Implementation Plan: UI Centering & Layout
 
-**Branch**: `001-ui-centering` | **Date**: 2026-02-26 | **Spec**: [spec.md](./spec.md)
-**Input**: Feature specification from `/specs/001-ui-centering/spec.md`
+**Branch**: `002-ui-centering` | **Date**: 2026-02-26 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/specs/002-ui-centering/spec.md`
 
 ## Summary
 

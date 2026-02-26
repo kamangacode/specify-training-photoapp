@@ -1,6 +1,6 @@
 # UI Contract: E2E Test Scenarios
 
-**Feature**: `001-ui-centering`
+**Feature**: `002-ui-centering`
 **Type**: Acceptance Test Contract
 
 ---
@@ -20,8 +20,14 @@
 - **Assert**: Album grid container width = viewport width minus horizontal padding (≥ viewport width - 30px)
 
 ### Scenario US1-03: No horizontal scroll at any viewport width
-- **Viewport sequence**: 320, 375, 640, 768, 1024, 1440, 1920
+- **Viewport sequence**: 320, 375, 640, 768, 1024, 1440, 1920, 2560
 - **Assert**: `document.documentElement.scrollWidth === document.documentElement.clientWidth` at each breakpoint
+
+### Scenario US1-05: Content has min 16px padding on tablet viewport
+- **Setup**: App loaded, ≥1 album exists
+- **Viewport**: 768 × 1024
+- **Action**: Navigate to main page
+- **Assert**: Album grid container has left padding ≥ 16px and right padding ≥ 16px (content does not touch viewport edges)
 
 ### Scenario US1-04: Album view photo grid centered on wide viewport
 - **Setup**: Open any album with ≥1 photo
@@ -64,3 +70,9 @@
 - **Setup**: Trash is empty
 - **Viewport**: 1440 × 900
 - **Assert**: Empty state element is horizontally centered
+
+### Scenario US3-04: Delete confirmation dialog centered in viewport
+- **Setup**: App loaded with ≥1 album containing ≥1 photo
+- **Viewport**: 1440 × 900
+- **Action**: Trigger delete confirmation dialog (e.g., permanently delete a photo from trash)
+- **Assert**: Dialog bounding box center ≈ viewport center (within 8px); overlay (`role="dialog"` or backdrop) covers the full viewport

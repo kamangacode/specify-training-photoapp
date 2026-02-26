@@ -1,6 +1,6 @@
 # Feature Specification: UI Centering & Layout
 
-**Feature Branch**: `001-ui-centering`
+**Feature Branch**: `002-ui-centering`
 **Created**: 2026-02-26
 **Status**: Draft
 **Input**: User description: "améliore UI en utilisant le skill frontend. Centre plus les éléments et les informations sur la page"
@@ -20,7 +20,7 @@ As a user browsing the app on a wide screen, all main content (album grid, photo
 1. **Given** the app is open on a screen wider than 1100px, **When** the user views the album list, **Then** the album grid is horizontally centered with equal empty margins on both sides
 2. **Given** the app is open on a screen wider than 1100px, **When** the user views photos inside an album, **Then** the photo grid is horizontally centered with equal margins
 3. **Given** the app is open on a mobile screen (<600px), **When** the user views any page, **Then** the content fills the available width without horizontal margins
-4. **Given** the app is open on a medium screen (600–1100px), **When** the user navigates, **Then** the content fills the width with comfortable padding on both sides
+4. **Given** the app is open on a medium screen (640–1100px), **When** the user navigates, **Then** the content fills the width with at least 16px of side padding on both sides
 
 ---
 
@@ -71,14 +71,14 @@ As a user encountering an empty state (no albums, no photos, empty trash) or a c
 - **FR-003**: Page headers and toolbar MUST be horizontally aligned with the content area below them on all screen sizes
 - **FR-004**: Empty state messages MUST be horizontally and vertically centered within their display area
 - **FR-005**: Confirmation dialogs MUST be centered in the viewport with a semi-transparent overlay covering the rest of the page
-- **FR-006**: On screens narrower than 600px, all content MUST fill the available width with minimum side padding (no constraining max-width)
+- **FR-006**: On screens narrower than 640px, all content MUST fill the available width with minimum side padding of 12px (no constraining max-width)
 - **FR-007**: Centering MUST NOT require scrolling in any direction on the viewport size where the layout is applied
 
 ### Assumptions
 
 - Max-width target: ~1100px (consistent with the existing `001-modern-ui` design tokens if any are defined)
 - Content padding inside the container: ~16–24px on each side
-- Mobile breakpoint: 600px
+- Mobile breakpoint: 640px
 - No new navigation structure is introduced — this is purely a layout/spacing change
 
 ## Success Criteria *(mandatory)*
