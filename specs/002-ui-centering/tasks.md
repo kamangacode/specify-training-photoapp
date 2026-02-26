@@ -68,11 +68,11 @@
 
 ### Implémentation US3
 
-- [ ] T013 [US3] Ajouter `min-height: 60vh` à `.main` dans `src/views/MainPage.module.css` (le flex existant centrera l'EmptyState verticalement)
-- [ ] T014 [US3] Ajouter `min-height: 60vh` à `.body` dans `src/components/albums/AlbumView.module.css`
-- [ ] T015 [US3] Ajouter `min-height: 60vh` à `.main` dans `src/views/TrashPage.module.css`
-- [ ] T016 [US3] Ajouter les scénarios US3-01 à US3-03 dans `tests/e2e/ui-centering.spec.ts`
-- [ ] T016b [US3] Vérifier que `ConfirmDialog` est centré dans le viewport (déjà implémenté via overlay fixed+flex dans `ConfirmDialog.module.css`) — ajouter scénario US3-04 dans `tests/e2e/ui-centering.spec.ts`
+- [X] T013 [US3] Ajouter `min-height: 60vh` à `.main` dans `src/views/MainPage.module.css` (le flex existant centrera l'EmptyState verticalement)
+- [X] T014 [US3] Ajouter `min-height: 60vh` à `.body` dans `src/components/albums/AlbumView.module.css`
+- [X] T015 [US3] Ajouter `min-height: 60vh` à `.main` dans `src/views/TrashPage.module.css`
+- [X] T016 [US3] Ajouter les scénarios US3-01 à US3-03 dans `tests/e2e/ui-centering.spec.ts`
+- [X] T016b [US3] Vérifier que `ConfirmDialog` est centré dans le viewport (déjà implémenté via overlay fixed+flex dans `ConfirmDialog.module.css`) — ajouter scénario US3-04 dans `tests/e2e/ui-centering.spec.ts`
 
 **Checkpoint**: Tous les empty states sont centrés → US3 testable indépendamment
 
