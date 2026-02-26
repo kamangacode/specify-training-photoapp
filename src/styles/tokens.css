@@ -116,6 +116,8 @@
 
   /* ===== SIZES ===== */
 
+  --page-max-width: 1100px;
+
   --size-icon-sm: 1rem;
   --size-icon-md: 1.5rem;
   --size-icon-lg: 2rem;
